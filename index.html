@@ -1,4 +1,4 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
@@ -7,43 +7,47 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f4f6f9; color: #333; }
-        
+
         /* Header & Navigation Bar */
         header { background-color: #131921; color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
         .top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; }
         .logo { font-size: 24px; font-weight: bold; color: #febd69; }
         .contact-top { font-size: 14px; }
-        
-        nav { background-color: #232f3e; padding: 10px; overflow-x: auto; white-space: nowrap; }
-        nav a { color: white; text-decoration: none; padding: 8px 15px; display: inline-block; font-size: 14px; }
-        nav a:hover { background-color: #37475a; border-radius: 4px; }
 
         /* Banner */
-        .banner { background: linear-gradient(135deg, #ff9900, #ff5500); color: white; text-align: center; padding: 25px 15px; font-size: 20px; font-weight: bold; }
-
+        .banner { background: linear-gradient(135deg, #ff9900, #ff5500); color: white; text-align: center; padding: 25px 15px; }
+        .banner h1 { font-size: 22px; margin-bottom: 5px; }
+        
         /* Main Layout */
         .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
         .section-title { margin-bottom: 15px; font-size: 20px; border-bottom: 2px solid #ff9900; display: inline-block; padding-bottom: 5px; }
 
         /* Catalog Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 8px; border: 1px solid #ddd; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+        .card { background: white; border-radius: 8px; border: 1px solid #ddd; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
         .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 160px; object-fit: contain; margin-bottom: 10px; }
-        .card h3 { font-size: 16px; margin-bottom: 5px; color: #111; }
-        .card p { font-size: 12px; color: #666; margin-bottom: 10px; flex-grow: 1; }
-        .price { font-size: 18px; font-weight: bold; color: #B12704; margin-bottom: 10px; }
-        .badges { margin-bottom: 10px; }
-        .badge { display: inline-block; background: #e7f3ff; color: #0066c0; font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: bold; }
+        .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; margin-bottom: 10px; background-color: #eee; }
+        .card h3 { font-size: 15px; margin-bottom: 5px; color: #111; height: 38px; overflow: hidden; }
+        .card p { font-size: 12px; color: #666; margin-bottom: 8px; flex-grow: 1; }
+        .price { font-size: 17px; font-weight: bold; color: #B12704; margin-bottom: 10px; }
         
-        /* Action Buttons */
-        .btn-wa { background-color: #25D366; color: white; text-decoration: none; padding: 10px; text-align: center; border-radius: 5px; font-weight: bold; display: block; margin-bottom: 5px; font-size: 14px; }
-        .btn-pay { background-color: #ffa41c; color: #111; text-align: center; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; font-size: 14px; }
+        /* Buttons */
+        .btn-wa { background-color: #25D366; color: white; border: none; padding: 8px; text-align: center; border-radius: 5px; font-weight: bold; cursor: pointer; margin-bottom: 6px; width: 100%; font-size: 13px; }
+        .btn-buy { background-color: #ffa41c; color: #111; border: none; padding: 8px; text-align: center; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; font-size: 13px; }
+        .btn-buy:hover { background-color: #ea8d00; }
 
         /* Footer */
-        footer { background-color: #131921; color: white; padding: 30px 20px; margin-top: 40px; font-size: 14px; }
-        .footer-content { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .footer-content h4 { color: #febd69; margin-bottom: 10px; }
+        footer { background-color: #131921; color: white; padding: 20px; margin-top: 40px; text-align: center; font-size: 14px; }
+
+        /* Order Modal / Form Popup */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center; }
+        .modal-content { background-color: white; padding: 20px; border-radius: 8px; width: 90%; max-width: 400px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .modal-content h3 { margin-bottom: 10px; color: #131921; }
+        .modal-content label { font-size: 12px; font-weight: bold; display: block; margin-top: 8px; }
+        .modal-content input, .modal-content textarea { width: 100%; padding: 8px; margin-top: 3px; border: 1px solid #ccc; border-radius: 4px; }
+        .modal-buttons { margin-top: 15px; display: flex; gap: 10px; }
+        .btn-submit { background-color: #25D366; color: white; border: none; padding: 10px; flex: 1; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        .btn-close { background-color: #dc3545; color: white; border: none; padding: 10px; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -56,295 +60,140 @@
         </div>
     </header>
 
-    <!-- Navigation Menu Bar -->
-    <nav>
-        <a href="#all">सभी आइटम</a>
-        <a href="#electric">इलेक्ट्रिक ओर इलेक्ट्रॉनिक</a>
-        <a href="#mobile">मोबाइल एसेसरीज</a>
-        <a href="#home">होम अप्लाइंस</a>
-        <a href="#kitchen">किचन आइटम</a>
-        <a href="#general">जनरल आइटम</a>
-    </nav>
-
-    <!-- Hero Banner -->
+    <!-- Banner -->
     <div class="banner">
-        सब कुछ सबसे कम कीमत पर! <br>
-        <small style="font-size: 14px; font-weight: normal;">कैश ऑन डिलीवरी (COD) और ऑनलाइन पेमेंट उपलब्ध</small>
+        <h1>सब कुछ सबसे कम कीमत पर!</h1>
+        <p>कैश ऑन डिलीवरी (COD) और ऑनलाइन पेमेंट उपलब्ध</p>
     </div>
 
     <!-- Main Content Grid -->
     <div class="container">
         <h2 class="section-title">हमारे 30 स्पेशल कैटलॉग (Best Offers)</h2>
-        <div class="grid" id="catalog-container">
-            <!-- 30 Catalog Items dynamically loaded via JS -->
+        
+        <div class="grid" id="catalog-grid">
+            <!-- JavaScript द्वारा 30 कैटलॉग आइटम्स यहाँ लोड होंगे -->
+        </div>
+    </div>
+
+    <!-- Order Modal (Popup Form) -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <h3>ऑर्डर विवरण भरें</h3>
+            <p id="modalProductTitle" style="font-weight: bold; color: #B12704; margin-bottom: 10px;"></p>
+            
+            <form id="orderForm" onsubmit="sendWhatsAppOrder(event)">
+                <label>आपका नाम *</label>
+                <input type="text" id="custName" required placeholder="पूरा नाम लिखें">
+
+                <label>मोबाइल नंबर *</label>
+                <input type="tel" id="custPhone" required placeholder="10 अंकों का नंबर">
+
+                <label>पूरा डिलीवरी का पता *</label>
+                <textarea id="custAddress" rows="3" required placeholder="मकान नं, गली/मोहल्ला, शहर"></textarea>
+
+                <label>पिनकोड (Pincode) *</label>
+                <input type="text" id="custPincode" required placeholder="जैसे: 380001">
+
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-submit">WhatsApp पर ऑर्डर भेजें</button>
+                    <button type="button" class="btn-close" onclick="closeOrderModal()">रद्द करें</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div>
-                <h4>Gujaratshop</h4>
-                <p>आपके भरोसेमंद और किफायती सामान का ऑनलाइन स्टोर।</p>
-            </div>
-            <div>
-                <h4>संपर्क सूत्र</h4>
-                <p>📍 तालेपुर (गोला) बस स्टैंड के पास,<br>तहसील: पालनपुर, जिला: बनासकांठा, गुजरात</p>
-                <p>📞 फोन: 9340827286</p>
-                <p>✉️ ईमेल: mastajuned86@gmail.com</p>
-            </div>
-            <div>
-                <h4>सुविधाएं</h4>
-                <p>✅ कैश ऑन डिलीवरी (COD)</p>
-                <p>✅ ऑनलाइन UPI / वॉलेट / कार्ड पेमेंट</p>
-                <p>✅ व्हाट्सएप से सीधा आर्डर</p>
-            </div>
-        </div>
+        <p>&copy; 2026 Gujaratshop | सर्वाधिकार सुरक्षित</p>
     </footer>
 
-    <!-- JavaScript for Dynamic Catalog & WhatsApp Integration -->
+    <!-- JavaScript Script -->
     <script>
-        const phone = "919340827286";
-        
         const products = [
-            // इलेक्ट्रिक और इलेक्ट्रॉनिक (1-6)
-            { id: 1, name: "LED बल्ब 9W (2 का पैक)", category: "इलेक्ट्रिक", desc: "हाई ब्राइटनेस, कम बिजली खपत वाला LED बल्ब।", price: 99, img: "https://via.placeholder.com/200?text=LED+Bulb" },
-            { id: 2, name: "3-पिन एक्सटेंशन बोर्ड", category: "इलेक्ट्रिक", desc: "4 सॉकेट और सेफ़्टी फ़्यूज़ के साथ 2 मीटर वायर।", price: 149, img: "https://via.placeholder.com/200?text=Extension+Board" },
-            { id: 3, name: "स्मार्ट 2-इन-1 टेस्टर", category: "इलेक्ट्रिक", desc: "डिजिटल वोल्टेज डिटेक्ट करने वाला पॉकेट टेस्टर।", price: 49, img: "https://via.placeholder.com/200?text=Tester" },
-            { id: 4, name: "नाइट लाइट सेंसर बल्ब", category: "इलेक्ट्रिक", desc: "अंधेरा होते ही अपने आप जलने वाला ऑटो ऑटो सेंसर बल्ब।", price: 79, img: "https://via.placeholder.com/200?text=Sensor+Bulb" },
-            { id: 5, name: "मल्टी-प्लग एडॉप्टर", category: "इलेक्ट्रिक", desc: "एक साथ 3 डिवाइस चार्ज करने वाला हैवी ड्यूटी प्लग।", price: 69, img: "https://via.placeholder.com/200?text=Multi+Plug" },
-            { id: 6, name: "इलेक्ट्रिक सोल्डरिंग आयरन Kit", category: "इलेक्ट्रिक", desc: "छोटे-मोटे रिपेयरिंग काम के लिए 60W आयरन मशीन।", price: 189, img: "https://via.placeholder.com/200?text=Soldering+Iron" },
-
-            // मोबाइल एसेसरीज (7-12)
-            { id: 7, name: "फास्ट चार्जिंग टाइप-C केबल", category: "मोबाइल", desc: "65W फ़ास्ट डेटा ट्रांसफ़र और चार्जिंग केबल।", price: 89, img: "https://via.placeholder.com/200?text=Type-C+Cable" },
-            { id: 8, name: "3D टेम्पर्ड ग्लास गार्ड", category: "मोबाइल", desc: "स्क्रैच प्रूफ और ऑल-मॉडल स्क्रीन प्रोटेक्टर।", price: 49, img: "https://via.placeholder.com/200?text=Tempered+Glass" },
-            { id: 9, name: "यूनिवर्सल मोबाइल स्टैंड", category: "मोबाइल", desc: "टेबल पर मोबाइल रखने का एड्जस्टेबल मेटल स्टैंड।", price: 59, img: "https://via.placeholder.com/200?text=Mobile+Stand" },
-            { id: 10, name: "ब्लूटूथ नेकबैंड इयरफ़ोन", category: "मोबाइल", desc: "20 घंटे बैटरी बैकअप और डीप बेस साउंड।", price: 299, img: "https://via.placeholder.com/200?text=Neckband" },
-            { id: 11, name: "कार मोबाइल होल्डर", category: "मोबाइल", desc: "360 डिग्री रोटेटिंग कार डैशबोर्ड स्टैंड।", price: 119, img: "https://via.placeholder.com/200?text=Car+Holder" },
-            { id: 12, name: "OTG कनेक्टर एडॉप्टर", category: "मोबाइल", desc: "पेनड्राइव को मोबाइल से तुरंत कनेक्ट करने वाला OTG।", price: 29, img: "https://via.placeholder.com/200?text=OTG+Adapter" },
-
-            // होम अप्लाइंस (13-18)
-            { id: 13, name: "पोर्टेबल मिनी टेबल फैन", category: "होम", desc: "USB से चलने वाला हवादार और शांत टेबल फैन।", price: 249, img: "https://via.placeholder.com/200?text=Mini+Fan" },
-            { id: 14, name: "ड्राय स्टीम आयरन (प्रेस)", category: "होम", desc: "लाइटवेट और नॉन-स्टिक कोटिंग वाली कपड़े की प्रेस।", price: 399, img: "https://via.placeholder.com/200?text=Dry+Iron" },
-            { id: 15, name: "इलेक्ट्रिक लिंट रिमूवर", category: "होम", desc: "ऊनी कपड़ों और स्वेटर से बूर/रोएं हटाने की मशीन।", price: 199, img: "https://via.placeholder.com/200?text=Lint+Remover" },
-            { id: 16, name: "मॉस्किटो किलर रैकेट", category: "होम", desc: "रिचार्ज करने योग्य मच्छर मारने वाला इलेक्ट्रिक बैट।", price: 229, img: "https://via.placeholder.com/200?text=Mosquito+Racket" },
-            { id: 17, name: "डिजिटल अलार्म क्लॉक", category: "होम", desc: "तापमान और तारीख दिखाने वाली LED डिजिटल घड़ी।", price: 149, img: "https://via.placeholder.com/200?text=Digital+Clock" },
-            { id: 18, name: "डोर बेल (इलेक्ट्रिक रिमोट)", category: "होम", desc: "बिना तार वाली और 32 धुन वाली रिमोट कॉलिंग बेल।", price: 179, img: "https://via.placeholder.com/200?text=Door+Bell" },
-
-            // किचन आइटम (19-24)
-            { id: 19, name: "इलेक्ट्रिक वॉटर डिस्पेंसर पंप", category: "किचन", desc: "20 लीटर कैन के लिए ऑटोमैटिक USB पंप।", price: 219, img: "https://via.placeholder.com/200?text=Water+Pump" },
-            { id: 20, name: "हैंडी वेजिटेबल चॉपर", category: "किचन", desc: "सब्जी और प्याज काटने की 3 ब्लेड वाली मैन्युअल मशीन।", price: 129, img: "https://via.placeholder.com/200?text=Chopper" },
-            { id: 21, name: "स्टेनलेस स्टील नाइफ सेट", category: "किचन", desc: "3 चाकू और 1 कैंची का कॉम्बो सेट।", price: 119, img: "https://via.placeholder.com/200?text=Knife+Set" },
-            { id: 22, name: "किचन वेइंग स्केल (कांटा)", category: "किचन", desc: "10 किग्रा तक का वजन नापने का डिजिटल स्केल।", price: 239, img: "https://via.placeholder.com/200?text=Weight+Scale" },
-            { id: 23, name: "सिलिकॉन स्पैटुला सेट", category: "किचन", desc: "नॉन-स्टिक बर्तनों के लिए हीट रेसिस्टेंट चम्मच सेट।", price: 99, img: "https://via.placeholder.com/200?text=Spatula+Set" },
-            { id: 24, name: "ऑयल स्प्रे बोतल (200ml)", category: "किचन", desc: "कुकिंग और फ्राइंग के लिए तेल स्प्रे करने की बोतल।", price: 89, img: "https://via.placeholder.com/200?text=Oil+Sprayer" },
-
-            // जनरल आइटम (25-30)
-            { id: 25, name: "मल्टीपर्पस ताला (30mm)", category: "जनरल", desc: "3 चाबियों के साथ मजबूत और जंग-रोधी ताला।", price: 79, img: "https://via.placeholder.com/200?text=Padlock" },
-            { id: 26, name: "LED टॉर्च लाइट (USB)", category: "जनरल", desc: "लंबी रेंज और ज़ूम फ़ीचर वाली पॉकेट टॉर्च।", price: 119, img: "https://via.placeholder.com/200?text=LED+Torch" },
-            { id: 27, name: "कार/बाइक क्लीनिंग क्लॉथ", category: "जनरल", desc: "माइक्रोफाइबर कपडा (3 का सेट) - पानी सोखने वाला।", price: 99, img: "https://via.placeholder.com/200?text=Microfiber" },
-            { id: 28, name: "मिनी स्विंग सिलाई मशीन", category: "जनरल", desc: "इमरजेंसी में कपड़ा सिलने की हाथ से चलने वाली मशीन।", price: 69, img: "https://via.placeholder.com/200?text=Hand+Stitch" },
-            { id: 29, name: "वाटरप्रूफ सीलेंट टेप", category: "जनरल", desc: "लीकेज और पाइप जोड़ने की सुपर स्ट्रॉन्ग टेप।", price: 89, img: "https://via.placeholder.com/200?text=Flex+Tape" },
-            { id: 30, name: "पॉकेट शेवर/ट्रिमर", category: "जनरल", desc: "दाढ़ी और बाल सेट करने का मिनी USB ट्रिमर।", price: 199, img: "https://via.placeholder.com/200?text=Mini+Trimmer" }
+            { id: 1, title: "LED बल्ब 9W (2 का पैक)", desc: "हाई ब्राइटनेस, कम बिजली खपत वाला LED बल्ब।", price: "99", img: "https://images.unsplash.com/photo-1550985616-10810253b84d?w=300" },
+            { id: 2, title: "मोबाइल स्टैंड & होल्डर", desc: "मजबूत और एडजस्टेबल मोबाइल होल्डर।", price: "149", img: "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=300" },
+            { id: 3, title: "स्मार्ट मिनी USB फैन", desc: "पोर्टेबल और पावरफुल कूलिंग फैन।", price: "199", img: "https://images.unsplash.com/photo-1618941716939-553df3c6c278?w=300" },
+            { id: 4, title: "ब्लूटूथ वायरलेस इयरफोन", desc: "शानदार साउंड क्वालिटी और लॉन्ग बैटरी।", price: "299", img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=300" },
+            { id: 5, title: "3 in 1 फास्ट चार्जिंग केबल", desc: "सब प्रकार के मोबाइल के लिए मल्टी-केबल।", price: "129", img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=300" },
+            { id: 6, title: "डिजिटल स्मार्ट वॉच", desc: "फिटनेस ट्रैकिंग और कॉल नोटिफिकेशन के साथ।", price: "499", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" },
+            { id: 7, title: "मल्टीपर्पस किचन नाइफ सेट", desc: "स्टेनलेस स्टील शार्प कटिंग नाइफ।", price: "249", img: "https://images.unsplash.com/photo-1593618998160-e34014e67546?w=300" },
+            { id: 8, title: "पोर्टेबल वाटर बोतल 1 Liter", desc: "मजबूत और बीपीए फ्री वाटर बोतल।", price: "179", img: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=300" },
+            { id: 9, title: "LED नाइट लैंप Sensor", desc: "ऑटो ऑन/ऑफ़ स्मार्ट नाइट लैंप।", price: "119", img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=300" },
+            { id: 10, title: "कार/बाइक सफाई क्लॉथ (माइक्रोफाइबर)", desc: "सुपर एब्जॉर्बेंट क्लॉथ (4 का सेट)।", price: "159", img: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=300" },
+            { id: 11, title: "इलेक्ट्रिक केतली 1.8 Litre", desc: "पानी और चाय तुरंत गरम करने के लिए।", price: "599", img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f6?w=300" },
+            { id: 12, title: "पोर्टेबल ब्लूटूथ स्पीकर", desc: "हाई बेस और वॉटरप्रूफ बॉडी।", price: "399", img: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=300" },
+            { id: 13, title: "एक्सटेंशन बोर्ड 4 सॉकेट", desc: "सुरक्षित और हैवी ड्यूटी वायर।", price: "229", img: "https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?w=300" },
+            { id: 14, title: "इयरफोन क्लीनिंग पेन", desc: "एयरपॉड्स और बड्स की सफाई के लिए।", price: "89", img: "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=300" },
+            { id: 15, title: "स्मार्ट ट्रिमर (Grooming Kit)", desc: "रीचार्जएबल शेविंग और हेयर ट्रिमर।", price: "349", img: "https://images.unsplash.com/photo-1621607512214-68297480165e?w=300" },
+            { id: 16, title: "सोलर पावर बैंक 10000mAh", desc: "धूप से चार्ज होने वाला पावर बैंक।", price: "799", img: "https://images.unsplash.com/photo-1609592424074-124b898a3b5c?w=300" },
+            { id: 17, title: "वेजिटेबल चॉपर (Manual)", desc: "सब्जियां जल्दी काटने के लिए चॉपर।", price: "199", img: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?w=300" },
+            { id: 18, title: "RGB डेस्क लाइट / रिंग लाइट", desc: "रील्स और फोटोग्राफी के लिए बेस्ट।", price: "299", img: "https://images.unsplash.com/photo-1616423642757-20235378aa86?w=300" },
+            { id: 19, title: "ड्राइविंग गॉगल्स (Anti Glare)", desc: "रात और धूप में साफ देखने के लिए।", price: "149", img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=300" },
+            { id: 20, title: "मिनी सिलाई मशीन (Handheld)", desc: "इमरजेंसी सिलाई के लिए पोर्टेबल मशीन।", price: "249", img: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=300" },
+            { id: 21, title: "मोबाइल गेमिंग ट्रिगर", desc: "PUBG/BGMI गेमिंग के लिए स्मूथ ट्रिगर।", price: "119", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300" },
+            { id: 22, title: "डोर गैप सीलर स्ट्रिप", desc: "धूल और कीड़ों को घर में आने से रोके।", price: "99", img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=300" },
+            { id: 23, title: "सिलिकॉन स्क्रबर ग्लव्स", desc: "बर्तन और सफाई के लिए टिकाऊ ग्लव्स।", price: "169", img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=300" },
+            { id: 24, title: "रीचार्जएबल टॉर्च Light", desc: "लॉन्ग रेंज ब्राइट LED टॉर्च।", price: "219", img: "https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=300" },
+            { id: 25, title: "कार फोन होल्डर (Dashboard)", desc: "नेविगेशन के लिए ग्रिप वाला होल्डर।", price: "189", img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300" },
+            { id: 26, title: "मल्टी-फंक्शनल पेचकस सेट", desc: "24 इन 1 स्क्रूड्राइवर किट।", price: "279", img: "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=300" },
+            { id: 27, title: "USB रिचार्जेबल जूसर", desc: "ताजा जूस बनाने के लिए पोर्टेबल जूसर।", price: "449", img: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=300" },
+            { id: 28, title: "पोर्टेबल क्लॉथ हैगर सेट", desc: "ट्रैवल फोल्डिंग कपड़े लटकाने का हैगर।", price: "139", img: "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?w=300" },
+            { id: 29, title: "वाटरप्रूफ मोबाइल कवर", desc: "बारिश और स्विमिंग के लिए सेफ कवर।", price: "79", img: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=300" },
+            { id: 30, title: "डिजिटल किचन वेइंग स्केल", desc: "सटीक वजन नापने की मशीन (Up to 10kg)।", price: "299", img: "https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?w=300" }
         ];
 
-        const container = document.getElementById('catalog-container');
-
-        products.forEach(item => {
-            const waMsg = encodeURIComponent(`नमस्ते गुजरातशॉप! मुझे यह आइटम आर्डर करना है:\n\n*नाम:* ${item.name}\n*कीमत:* ₹${item.price}\n*आईडी:* #${item.id}\n\nकृपया डिलीवरी की जानकारी भेजें।`);
-            const waUrl = `https://wa.me/${phone}?text=${waMsg}`;
-
-            const cardHtml = `
+        // कैटलॉग लोड करना
+        const grid = document.getElementById('catalog-grid');
+        products.forEach(p => {
+            grid.innerHTML += `
                 <div class="card">
-                    <img src="${item.img}" alt="${item.name}">
-                    <h3>${item.name}</h3>
-                    <p>${item.desc}</p>
-                    <div class="price">₹${item.price}</div>
-                    <div class="badges">
-                        <span class="badge">COD उपलब्ध</span>
-                        <span class="badge">ऑनलाइन पेमेंट</span>
-                    </div>
-                    <a href="${waUrl}" target="_blank" class="btn-wa">📱 व्हाट्सएप से आर्डर करें</a>
-                    <button class="btn-pay" onclick="alert('ऑनलाइन पेमेंट और COD चुनने के लिए व्हाट्सएप पर मैसेज भेजें।')">💳 अभी खरीदें</button>
+                    <img src="${p.img}" alt="${p.title}">
+                    <h3>${p.title}</h3>
+                    <p>${p.desc}</p>
+                    <div class="price">₹${p.price}</div>
+                    <button class="btn-wa" onclick="openOrderModal('${p.title}', '${p.price}')">📲 WhatsApp से ऑर्डर करें</button>
+                    <button class="btn-buy" onclick="openOrderModal('${p.title}', '${p.price}')">🛒 अभी खरीदें (COD)</button>
                 </div>
             `;
-            container.innerHTML += cardHtml;
         });
-    </script>
-</body>
-</html>
- html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gujaratshop - किफायती ऑनलाइन स्टोर</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f6f9; color: #333; }
-        
-        /* Header & Navigation Bar */
-        header { background-color: #131921; color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
-        .top-bar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; }
-        .logo { font-size: 24px; font-weight: bold; color: #febd69; }
-        .contact-top { font-size: 14px; }
-        
-        nav { background-color: #232f3e; padding: 10px; overflow-x: auto; white-space: nowrap; }
-        nav a { color: white; text-decoration: none; padding: 8px 15px; display: inline-block; font-size: 14px; }
-        nav a:hover { background-color: #37475a; border-radius: 4px; }
 
-        /* Banner */
-        .banner { background: linear-gradient(135deg, #ff9900, #ff5500); color: white; text-align: center; padding: 25px 15px; font-size: 20px; font-weight: bold; }
+        let selectedProduct = "";
+        let selectedPrice = "";
 
-        /* Main Layout */
-        .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
-        .section-title { margin-bottom: 15px; font-size: 20px; border-bottom: 2px solid #ff9900; display: inline-block; padding-bottom: 5px; }
+        function openOrderModal(productName, price) {
+            selectedProduct = productName;
+            selectedPrice = price;
+            document.getElementById('modalProductTitle').innerText = productName + " - ₹" + price;
+            document.getElementById('orderModal').style.display = 'flex';
+        }
 
-        /* Catalog Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 8px; border: 1px solid #ddd; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s; }
-        .card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 160px; object-fit: contain; margin-bottom: 10px; }
-        .card h3 { font-size: 16px; margin-bottom: 5px; color: #111; }
-        .card p { font-size: 12px; color: #666; margin-bottom: 10px; flex-grow: 1; }
-        .price { font-size: 18px; font-weight: bold; color: #B12704; margin-bottom: 10px; }
-        .badges { margin-bottom: 10px; }
-        .badge { display: inline-block; background: #e7f3ff; color: #0066c0; font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: bold; }
-        
-        /* Action Buttons */
-        .btn-wa { background-color: #25D366; color: white; text-decoration: none; padding: 10px; text-align: center; border-radius: 5px; font-weight: bold; display: block; margin-bottom: 5px; font-size: 14px; }
-        .btn-pay { background-color: #ffa41c; color: #111; text-align: center; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; font-size: 14px; }
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
 
-        /* Footer */
-        footer { background-color: #131921; color: white; padding: 30px 20px; margin-top: 40px; font-size: 14px; }
-        .footer-content { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .footer-content h4 { color: #febd69; margin-bottom: 10px; }
-    </style>
-</head>
-<body>
+        function sendWhatsAppOrder(event) {
+            event.preventDefault();
+            
+            let name = document.getElementById('custName').value;
+            let phone = document.getElementById('custPhone').value;
+            let address = document.getElementById('custAddress').value;
+            let pincode = document.getElementById('custPincode').value;
 
-    <!-- Header -->
-    <header>
-        <div class="top-bar">
-            <div class="logo">Gujaratshop</div>
-            <div class="contact-top">📞 9340827286</div>
-        </div>
-    </header>
+            let myNumber = "919340827286"; 
 
-    <!-- Navigation Menu Bar -->
-    <nav>
-        <a href="#all">सभी आइटम</a>
-        <a href="#electric">इलेक्ट्रिक ओर इलेक्ट्रॉनिक</a>
-        <a href="#mobile">मोबाइल एसेसरीज</a>
-        <a href="#home">होम अप्लाइंस</a>
-        <a href="#kitchen">किचन आइटम</a>
-        <a href="#general">जनरल आइटम</a>
-    </nav>
+            let message = "*नया ऑर्डर प्राप्त हुआ (Gujaratshop)*%0A%0A" +
+                "*सामान:* " + selectedProduct + "%0A" +
+                "*कीमत:* ₹" + selectedPrice + "%0A%0A" +
+                "*ग्राहक की जानकारी:*%0A" +
+                "👤 *नाम:* " + name + "%0A" +
+                "📞 *फोन:* " + phone + "%0A" +
+                "🏠 *पता:* " + address + "%0A" +
+                "📍 *पिनकोड:* " + pincode;
 
-    <!-- Hero Banner -->
-    <div class="banner">
-        सब कुछ सबसे कम कीमत पर! <br>
-        <small style="font-size: 14px; font-weight: normal;">कैश ऑन डिलीवरी (COD) और ऑनलाइन पेमेंट उपलब्ध</small>
-    </div>
-
-    <!-- Main Content Grid -->
-    <div class="container">
-        <h2 class="section-title">हमारे 30 स्पेशल कैटलॉग (Best Offers)</h2>
-        <div class="grid" id="catalog-container">
-            <!-- 30 Catalog Items dynamically loaded via JS -->
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div>
-                <h4>Gujaratshop</h4>
-                <p>आपके भरोसेमंद और किफायती सामान का ऑनलाइन स्टोर।</p>
-            </div>
-            <div>
-                <h4>संपर्क सूत्र</h4>
-                <p>📍 तालेपुर (गोला) बस स्टैंड के पास,<br>तहसील: पालनपुर, जिला: बनासकांठा, गुजरात</p>
-                <p>📞 फोन: 9340827286</p>
-                <p>✉️ ईमेल: mastajuned86@gmail.com</p>
-            </div>
-            <div>
-                <h4>सुविधाएं</h4>
-                <p>✅ कैश ऑन डिलीवरी (COD)</p>
-                <p>✅ ऑनलाइन UPI / वॉलेट / कार्ड पेमेंट</p>
-                <p>✅ व्हाट्सएप से सीधा आर्डर</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript for Dynamic Catalog & WhatsApp Integration -->
-    <script>
-        const phone = "919340827286";
-        
-        const products = [
-            // इलेक्ट्रिक और इलेक्ट्रॉनिक (1-6)
-            { id: 1, name: "LED बल्ब 9W (2 का पैक)", category: "इलेक्ट्रिक", desc: "हाई ब्राइटनेस, कम बिजली खपत वाला LED बल्ब।", price: 99, img: "https://via.placeholder.com/200?text=LED+Bulb" },
-            { id: 2, name: "3-पिन एक्सटेंशन बोर्ड", category: "इलेक्ट्रिक", desc: "4 सॉकेट और सेफ़्टी फ़्यूज़ के साथ 2 मीटर वायर।", price: 149, img: "https://via.placeholder.com/200?text=Extension+Board" },
-            { id: 3, name: "स्मार्ट 2-इन-1 टेस्टर", category: "इलेक्ट्रिक", desc: "डिजिटल वोल्टेज डिटेक्ट करने वाला पॉकेट टेस्टर।", price: 49, img: "https://via.placeholder.com/200?text=Tester" },
-            { id: 4, name: "नाइट लाइट सेंसर बल्ब", category: "इलेक्ट्रिक", desc: "अंधेरा होते ही अपने आप जलने वाला ऑटो ऑटो सेंसर बल्ब।", price: 79, img: "https://via.placeholder.com/200?text=Sensor+Bulb" },
-            { id: 5, name: "मल्टी-प्लग एडॉप्टर", category: "इलेक्ट्रिक", desc: "एक साथ 3 डिवाइस चार्ज करने वाला हैवी ड्यूटी प्लग।", price: 69, img: "https://via.placeholder.com/200?text=Multi+Plug" },
-            { id: 6, name: "इलेक्ट्रिक सोल्डरिंग आयरन Kit", category: "इलेक्ट्रिक", desc: "छोटे-मोटे रिपेयरिंग काम के लिए 60W आयरन मशीन।", price: 189, img: "https://via.placeholder.com/200?text=Soldering+Iron" },
-
-            // मोबाइल एसेसरीज (7-12)
-            { id: 7, name: "फास्ट चार्जिंग टाइप-C केबल", category: "मोबाइल", desc: "65W फ़ास्ट डेटा ट्रांसफ़र और चार्जिंग केबल।", price: 89, img: "https://via.placeholder.com/200?text=Type-C+Cable" },
-            { id: 8, name: "3D टेम्पर्ड ग्लास गार्ड", category: "मोबाइल", desc: "स्क्रैच प्रूफ और ऑल-मॉडल स्क्रीन प्रोटेक्टर।", price: 49, img: "https://via.placeholder.com/200?text=Tempered+Glass" },
-            { id: 9, name: "यूनिवर्सल मोबाइल स्टैंड", category: "मोबाइल", desc: "टेबल पर मोबाइल रखने का एड्जस्टेबल मेटल स्टैंड।", price: 59, img: "https://via.placeholder.com/200?text=Mobile+Stand" },
-            { id: 10, name: "ब्लूटूथ नेकबैंड इयरफ़ोन", category: "मोबाइल", desc: "20 घंटे बैटरी बैकअप और डीप बेस साउंड।", price: 299, img: "https://via.placeholder.com/200?text=Neckband" },
-            { id: 11, name: "कार मोबाइल होल्डर", category: "मोबाइल", desc: "360 डिग्री रोटेटिंग कार डैशबोर्ड स्टैंड।", price: 119, img: "https://via.placeholder.com/200?text=Car+Holder" },
-            { id: 12, name: "OTG कनेक्टर एडॉप्टर", category: "मोबाइल", desc: "पेनड्राइव को मोबाइल से तुरंत कनेक्ट करने वाला OTG।", price: 29, img: "https://via.placeholder.com/200?text=OTG+Adapter" },
-
-            // होम अप्लाइंस (13-18)
-            { id: 13, name: "पोर्टेबल मिनी टेबल फैन", category: "होम", desc: "USB से चलने वाला हवादार और शांत टेबल फैन।", price: 249, img: "https://via.placeholder.com/200?text=Mini+Fan" },
-            { id: 14, name: "ड्राय स्टीम आयरन (प्रेस)", category: "होम", desc: "लाइटवेट और नॉन-स्टिक कोटिंग वाली कपड़े की प्रेस।", price: 399, img: "https://via.placeholder.com/200?text=Dry+Iron" },
-            { id: 15, name: "इलेक्ट्रिक लिंट रिमूवर", category: "होम", desc: "ऊनी कपड़ों और स्वेटर से बूर/रोएं हटाने की मशीन।", price: 199, img: "https://via.placeholder.com/200?text=Lint+Remover" },
-            { id: 16, name: "मॉस्किटो किलर रैकेट", category: "होम", desc: "रिचार्ज करने योग्य मच्छर मारने वाला इलेक्ट्रिक बैट।", price: 229, img: "https://via.placeholder.com/200?text=Mosquito+Racket" },
-            { id: 17, name: "डिजिटल अलार्म क्लॉक", category: "होम", desc: "तापमान और तारीख दिखाने वाली LED डिजिटल घड़ी।", price: 149, img: "https://via.placeholder.com/200?text=Digital+Clock" },
-            { id: 18, name: "डोर बेल (इलेक्ट्रिक रिमोट)", category: "होम", desc: "बिना तार वाली और 32 धुन वाली रिमोट कॉलिंग बेल।", price: 179, img: "https://via.placeholder.com/200?text=Door+Bell" },
-
-            // किचन आइटम (19-24)
-            { id: 19, name: "इलेक्ट्रिक वॉटर डिस्पेंसर पंप", category: "किचन", desc: "20 लीटर कैन के लिए ऑटोमैटिक USB पंप।", price: 219, img: "https://via.placeholder.com/200?text=Water+Pump" },
-            { id: 20, name: "हैंडी वेजिटेबल चॉपर", category: "किचन", desc: "सब्जी और प्याज काटने की 3 ब्लेड वाली मैन्युअल मशीन।", price: 129, img: "https://via.placeholder.com/200?text=Chopper" },
-            { id: 21, name: "स्टेनलेस स्टील नाइफ सेट", category: "किचन", desc: "3 चाकू और 1 कैंची का कॉम्बो सेट।", price: 119, img: "https://via.placeholder.com/200?text=Knife+Set" },
-            { id: 22, name: "किचन वेइंग स्केल (कांटा)", category: "किचन", desc: "10 किग्रा तक का वजन नापने का डिजिटल स्केल।", price: 239, img: "https://via.placeholder.com/200?text=Weight+Scale" },
-            { id: 23, name: "सिलिकॉन स्पैटुला सेट", category: "किचन", desc: "नॉन-स्टिक बर्तनों के लिए हीट रेसिस्टेंट चम्मच सेट।", price: 99, img: "https://via.placeholder.com/200?text=Spatula+Set" },
-            { id: 24, name: "ऑयल स्प्रे बोतल (200ml)", category: "किचन", desc: "कुकिंग और फ्राइंग के लिए तेल स्प्रे करने की बोतल।", price: 89, img: "https://via.placeholder.com/200?text=Oil+Sprayer" },
-
-            // जनरल आइटम (25-30)
-            { id: 25, name: "मल्टीपर्पस ताला (30mm)", category: "जनरल", desc: "3 चाबियों के साथ मजबूत और जंग-रोधी ताला।", price: 79, img: "https://via.placeholder.com/200?text=Padlock" },
-            { id: 26, name: "LED टॉर्च लाइट (USB)", category: "जनरल", desc: "लंबी रेंज और ज़ूम फ़ीचर वाली पॉकेट टॉर्च।", price: 119, img: "https://via.placeholder.com/200?text=LED+Torch" },
-            { id: 27, name: "कार/बाइक क्लीनिंग क्लॉथ", category: "जनरल", desc: "माइक्रोफाइबर कपडा (3 का सेट) - पानी सोखने वाला।", price: 99, img: "https://via.placeholder.com/200?text=Microfiber" },
-            { id: 28, name: "मिनी स्विंग सिलाई मशीन", category: "जनरल", desc: "इमरजेंसी में कपड़ा सिलने की हाथ से चलने वाली मशीन।", price: 69, img: "https://via.placeholder.com/200?text=Hand+Stitch" },
-            { id: 29, name: "वाटरप्रूफ सीलेंट टेप", category: "जनरल", desc: "लीकेज और पाइप जोड़ने की सुपर स्ट्रॉन्ग टेप।", price: 89, img: "https://via.placeholder.com/200?text=Flex+Tape" },
-            { id: 30, name: "पॉकेट शेवर/ट्रिमर", category: "जनरल", desc: "दाढ़ी और बाल सेट करने का मिनी USB ट्रिमर।", price: 199, img: "https://via.placeholder.com/200?text=Mini+Trimmer" }
-        ];
-
-        const container = document.getElementById('catalog-container');
-
-        products.forEach(item => {
-            const waMsg = encodeURIComponent(`नमस्ते गुजरातशॉप! मुझे यह आइटम आर्डर करना है:\n\n*नाम:* ${item.name}\n*कीमत:* ₹${item.price}\n*आईडी:* #${item.id}\n\nकृपया डिलीवरी की जानकारी भेजें।`);
-            const waUrl = `https://wa.me/${phone}?text=${waMsg}`;
-class
-            const cardHtml = `
-                <div class="card">
-                    <img src="${item.img}" alt="${item.name}">
-                    <h3>${item.name}</h3>
-                    <p>${item.desc}</p>
-                    <div class="price">₹${item.price}</div>
-                    <div class="badges">
-                        <span ="badge">COD उपलब्ध</span>
-                        <span class="badge">ऑनलाइन पेमेंट</span>
-                    </div>
-                    <a href="${waUrl}" target="_blank" class="btn-wa">📱 व्हाट्सएप से आर्डर करें</a>
-                    <button class="btn-pay" onclick="alert('ऑनलाइन पेमेंट और COD चुनने के लिए व्हाट्सएप पर मैसेज भेजें।')">💳 अभी खरीदें</button>
-                </div>
-            `;
-            container.innerHTML += cardHtml;
-        });
+            let whatsappUrl = "https://wa.me/" + myNumber + "?text=" + message;
+            window.open(whatsappUrl, '_blank');
+            closeOrderModal();
+        }
     </script>
 </body>
 </html>
